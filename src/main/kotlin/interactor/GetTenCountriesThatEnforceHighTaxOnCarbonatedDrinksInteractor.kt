@@ -4,6 +4,7 @@ import model.CityEntity
 
 class GetTenCountriesThatEnforceHighTaxOnCarbonatedDrinksInteractor(private val dataSource: CostOfLivingDataSource) {
 fun execute(): List<Pair<String,Float>> {
+    val allcountry=dataSource
     return findTaxOnCokeForCities(dataSource.getAllCitiesData().filter (::excludeNullValuesAndDataQuality))
         .map {it.first to it.second/it.third.toFloat()  }.sortedByDescending { it.second }.take(10)
 }
